@@ -27,8 +27,8 @@ module RSpec
         # correctly defined `respond_to?`, and also 1.8 which does not provide
         # method handles for missing methods even if `respond_to?` is correct.
         @original_implementation_callable ||= original_method ||
-          Proc.new do |*args, &block|
-            @object.__send__(:method_missing, @method_name, *args, &block)
+          Proc.new do |*args, **kwargs, &block|
+            @object.__send__(:method_missing, @method_name, *args, **kwargs, &block)
           end
       end
 
